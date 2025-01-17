@@ -228,6 +228,20 @@ void print_double(long double lv)
 	std::cout << "\ndouble: " << static_cast<double>(v) << std::endl;
 }
 
+ScalarConverter::ScalarConverter()
+{
+}
+ScalarConverter::ScalarConverter(const ScalarConverter &)
+{
+}
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &)
+{
+	return (*this);
+}
+ScalarConverter::~ScalarConverter()
+{
+}
+
 void ScalarConverter::convert(std::string value)
 {
 	Type type{find_type(value)};
