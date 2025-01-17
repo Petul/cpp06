@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 19:14:33 by pleander          #+#    #+#             */
-/*   Updated: 2025/01/17 20:30:44 by pleander         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:33:13 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ Base *generate(void)
 	}
 }
 
+// dynamic_cast returns a null pointer for classes being pointed to
 void identify(Base *p)
 {
 	if (dynamic_cast<A *>(p))
@@ -49,12 +50,15 @@ void identify(Base *p)
 	}
 }
 
+// dynamic_cast cannot return null pointer for casts being referenced, so it
+// throws std::bad_cast instead
 void identify(Base &p)
 {
 	try
 	{
 		(void)dynamic_cast<A &>(p);
 		std::cout << "A" << std::endl;
+		return;
 	}
 	catch (std::bad_cast &)
 	{
@@ -64,6 +68,7 @@ void identify(Base &p)
 	{
 		(void)dynamic_cast<B &>(p);
 		std::cout << "B" << std::endl;
+		return;
 	}
 	catch (std::bad_cast &)
 	{
@@ -73,6 +78,7 @@ void identify(Base &p)
 	{
 		(void)dynamic_cast<C &>(p);
 		std::cout << "C" << std::endl;
+		return;
 	}
 	catch (std::bad_cast &)
 	{
