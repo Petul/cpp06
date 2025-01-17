@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:43:11 by pleander          #+#    #+#             */
-/*   Updated: 2025/01/17 14:50:35 by pleander         ###   ########.fr       */
+/*   Updated: 2025/01/17 14:56:15 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ struct Data
 
 class Serializer
 {
-   public:
-	Serializer() = delete;
-	Serializer(const Serializer &) = delete;
-	Serializer &operator=(const Serializer &) = delete;
+   private:
+	Serializer();
+	Serializer(const Serializer &);
+	Serializer &operator=(const Serializer &);
 
+   public:
 	static uintptr_t serialize(Data *ptr);
 	static Data *deserialize(uintptr_t raw);
 };
