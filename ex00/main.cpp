@@ -5,23 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 14:47:52 by pleander          #+#    #+#             */
-/*   Updated: 2025/01/17 14:51:42 by pleander         ###   ########.fr       */
+/*   Created: 2025/01/17 09:57:14 by pleander          #+#    #+#             */
+/*   Updated: 2025/01/17 10:50:12 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstring>
 #include <iostream>
 
-#include "Serializer.hpp"
+#include "ScalarConverter.hpp"
 
-int main(void)
+int main(int argc, char **argv)
 {
-	Data d{"foo", 12};
-
-	std::cout << "Address of original data: " << &d << std::endl;
-
-	uintptr_t raw = Serializer::serialize(&d);
-	Data *deserialized = Serializer::deserialize(raw);
-
-	std::cout << "Address of deserialized data: " << deserialized << std::endl;
+	if (argc != 2 || !isprint(*argv[1]))
+	{
+		std::cout << "Error: usage ./convert <printable literal>" << std::endl;
+		exit(1);
+	}
+	ScalarConverter::convert(argv[1]);
+	return (0);
 }

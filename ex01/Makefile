@@ -6,14 +6,14 @@
 #    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/17 10:49:05 by pleander          #+#    #+#              #
-#    Updated: 2025/01/17 10:50:07 by pleander         ###   ########.fr        #
+#    Updated: 2025/01/17 14:52:16 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := ScalarConverter
+NAME := Serializer
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++11
-SOURCES := main.cpp ScalarConverter.cpp
+SOURCES := main.cpp Serializer.cpp
 
 OBJECTS := $(SOURCES:.cpp=.o)
 
