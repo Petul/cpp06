@@ -15,17 +15,23 @@
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
+#include <ios>
 #include <iostream>
 #include <limits>
 
-enum Type
+ScalarConverter::ScalarConverter()
 {
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
-	VOID,
-};
+}
+ScalarConverter::ScalarConverter(const ScalarConverter &)
+{
+}
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &)
+{
+	return (*this);
+}
+ScalarConverter::~ScalarConverter()
+{
+}
 
 bool is_char(std::string value)
 {
@@ -40,6 +46,10 @@ bool is_int(std::string value)
 {
 	for (int i = 0; i < static_cast<int>(value.size()); i++)
 	{
+		if (i == 0 && value[i] == '-')
+		{
+			continue;
+		}
 		if (!isdigit(value[i]))
 		{
 			return (false);
@@ -74,191 +84,121 @@ Type find_type(std::string value)
 {
 	if (is_char(value))
 	{
-		std::cout << "type is char" << std::endl;
 		return (CHAR);
 	}
-	if (is_int(value))
+	else if (is_int(value))
 	{
-		std::cout << "type is int" << std::endl;
 		return (INT);
 	}
-	if (is_float(value))
+	else if (is_float(value))
 	{
-		std::cout << "type is float" << std::endl;
 		return (FLOAT);
 	}
-	if (is_double(value))
+	else if (is_double(value))
 	{
-		std::cout << "type is double" << std::endl;
 		return (DOUBLE);
 	}
 	return (VOID);
 }
 
-void print_int(long lv)
+void ScalarConverter::output(char val)
 {
-	if (lv > std::numeric_limits<int>::max() ||
-	    lv < std::numeric_limits<int>::min())
-	{
-		std::cout << "impossible conversion" << std::endl;
-		return;
-	}
-	int v = static_cast<int>(lv);
+	print_char(val);
+	print_int(val);
+	print_float(val);
+	print_double(val);
+}
 
-	if (v > std::numeric_limits<char>::max() ||
-	    v < std::numeric_limits<char>::min())
+void ScalarConverter::output(int val)
+{
+	print_char(val);
+	print_int(val);
+	print_float(val);
+	print_double(val);
+}
+
+void ScalarConverter::output(float val)
+{
+	print_char(val);
+	print_int(val);
+	print_float(val);
+	print_double(val);
+}
+
+void ScalarConverter::output(double val)
+{
+	print_char(val);
+	print_int(val);
+	print_float(val);
+	print_double(val);
+}
+
+void ScalarConverter::print_char(double val)
+{
+	if (val > std::numeric_limits<char>::max() ||
+	    val < std::numeric_limits<char>::lowest() || std::isnan(val))
 	{
 		std::cout << "char: impossible";
 	}
-	else if (!isprint(v))
+	else if (!isprint(val))
 	{
 		std::cout << "char: Non displayable";
 	}
 	else
 	{
-		std::cout << "char: " << static_cast<char>(v);
+		std::cout << "char: '" << static_cast<char>(val) << "'";
 	}
-	std::cout << "\nint: " << static_cast<int>(v);
-	std::cout << std::setprecision(1) << std::fixed;
-	std::cout << "\nfloat: " << static_cast<float>(v) << "f";
-	std::cout << "\ndouble: " << static_cast<double>(v) << std::endl;
 }
 
-void print_char(char v)
+void ScalarConverter::print_int(double val)
 {
-	if (isprint(v))
+	if (val < std::numeric_limits<int>::lowest() ||
+	    val > std::numeric_limits<int>::max() || std::isnan(val))
 	{
-		std::cout << "char: " << static_cast<char>(v);
-	}
-	else
-	{
-		std::cout << "char: Non displayable";
-	}
-	std::cout << "\nint: " << static_cast<int>(v);
-	std::cout << std::setprecision(1) << std::fixed;
-	std::cout << "\nfloat: " << static_cast<float>(v) << "f";
-	std::cout << "\ndouble: " << static_cast<double>(v) << std::endl;
-}
-
-void print_float(double lv)
-{
-	if (lv > std::numeric_limits<float>::max() ||
-	    lv < std::numeric_limits<float>::min())
-	{
-		std::cout << "impossible conversion" << std::endl;
-		return;
-	}
-	float v = static_cast<float>(lv);
-	if (std::isnan(v) || std::isinf(v))
-	{
-		std::cout << "char: impossible";
 		std::cout << "\nint: impossible";
 	}
 	else
 	{
-		if (v > std::numeric_limits<char>::max() ||
-		    v < std::numeric_limits<char>::min())
-		{
-			std::cout << "char: impossible";
-		}
-		else if (isprint(static_cast<char>(v)))
-		{
-			std::cout << "char: '" << static_cast<char>(v) << "'";
-		}
-		else
-		{
-			std::cout << "char: Non displayable";
-		}
-		if (static_cast<double>(v) < std::numeric_limits<int>::min() ||
-		    static_cast<double>(v) > std::numeric_limits<int>::max())
-		{
-			std::cout << "\nint: impossible";
-		}
-		else
-		{
-			std::cout << "\nint: " << static_cast<int>(v);
-		}
+		std::cout << "\nint: " << static_cast<int>(val);
 	}
-	std::cout << std::setprecision(1) << std::fixed;
-	std::cout << "\nfloat: " << static_cast<float>(v) << "f";
-	std::cout << "\ndouble: " << static_cast<double>(v) << std::endl;
 }
 
-void print_double(long double lv)
+void ScalarConverter::print_float(double val)
 {
-	if (lv > std::numeric_limits<double>::max() ||
-	    lv < std::numeric_limits<double>::min())
+	if (val < std::numeric_limits<float>::lowest() ||
+	    val > std::numeric_limits<float>::max())
 	{
-		std::cout << "impossible conversion" << std::endl;
-		return;
-	}
-	double v = static_cast<double>(lv);
-	if (std::isnan(v) || std::isinf(v))
-	{
-		std::cout << "char: impossible";
-		std::cout << "\nint: impossible";
+		std::cout << "\nfloat: impossible";
 	}
 	else
 	{
-		if (v > std::numeric_limits<char>::max() ||
-		    v < std::numeric_limits<char>::min())
-		{
-			std::cout << "char: impossible";
-		}
-		else if (isprint(static_cast<char>(v)))
-		{
-			std::cout << "char: '" << static_cast<char>(v) << "'";
-		}
-		else
-		{
-			std::cout << "char: Non displayable";
-		}
-		if (static_cast<double>(v) < std::numeric_limits<int>::min() ||
-		    static_cast<double>(v) > std::numeric_limits<int>::max())
-		{
-			std::cout << "\nint: impossible";
-		}
-		else
-		{
-			std::cout << "\nint: " << static_cast<int>(v);
-		}
+		std::cout << std::setprecision(1) << std::fixed
+		          << "\nfloat: " << static_cast<float>(val) << "f";
 	}
-	std::cout << std::setprecision(1) << std::fixed;
-	std::cout << "\nfloat: " << static_cast<float>(v) << "f";
-	std::cout << "\ndouble: " << static_cast<double>(v) << std::endl;
 }
 
-ScalarConverter::ScalarConverter()
+void ScalarConverter::print_double(double val)
 {
-}
-ScalarConverter::ScalarConverter(const ScalarConverter &)
-{
-}
-ScalarConverter &ScalarConverter::operator=(const ScalarConverter &)
-{
-	return (*this);
-}
-ScalarConverter::~ScalarConverter()
-{
+	std::cout << std::setprecision(1) << std::fixed << "\ndouble: " << val
+	          << std::endl;
 }
 
 void ScalarConverter::convert(std::string value)
 {
 	Type type{find_type(value)};
-
 	switch (type)
 	{
 		case CHAR:
-			print_char(value[0]);
+			output(value[0]);
 			break;
 		case INT:
-			print_int(strtol(value.c_str(), NULL, 0));
+			output(std::stoi(value));
 			break;
 		case FLOAT:
-			print_float(strtod(value.c_str(), NULL));
+			output(std::stof(value));
 			break;
 		case DOUBLE:
-			print_double(strtold(value.c_str(), NULL));
+			output(std::stod(value));
 			break;
 		case VOID:
 			std::cout << "Error: Unkown literal." << std::endl;

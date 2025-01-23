@@ -15,6 +15,15 @@
 
 #include <string>
 
+enum Type
+{
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	VOID,
+};
+
 class ScalarConverter
 {
    private:
@@ -22,6 +31,14 @@ class ScalarConverter
 	ScalarConverter(const ScalarConverter&);
 	ScalarConverter& operator=(const ScalarConverter&);
 	~ScalarConverter();
+	static void output(char val);
+	static void output(int val);
+	static void output(float val);
+	static void output(double val);
+	static void print_char(double);
+	static void print_int(double);
+	static void print_float(double);
+	static void print_double(double);
 
    public:
 	static void convert(std::string value);

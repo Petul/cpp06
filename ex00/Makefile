@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME := ScalarConverter
+NAME := convert
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++11
 SOURCES := main.cpp ScalarConverter.cpp
