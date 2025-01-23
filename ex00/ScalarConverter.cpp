@@ -32,7 +32,6 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &)
 ScalarConverter::~ScalarConverter()
 {
 }
-
 bool ScalarConverter::is_char(std::string value)
 {
 	if (value.length() == 1 && !isdigit(value[0]) && isprint(value[0]))
