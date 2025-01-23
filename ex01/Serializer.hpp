@@ -19,6 +19,7 @@ struct Data
 {
 	std::string msg;
 	int num;
+	float f;
 };
 
 class Serializer

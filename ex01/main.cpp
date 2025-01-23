@@ -16,7 +16,7 @@
 
 int main(void)
 {
-	Data d{"foo", 12};
+	Data d{"foo", 42, 42.42f};
 
 	std::cout << "Address of original data: " << &d << std::endl;
 
@@ -24,4 +24,5 @@ int main(void)
 	Data *deserialized = Serializer::deserialize(raw);
 
 	std::cout << "Address of deserialized data: " << deserialized << std::endl;
+	std::cout << "Data: (" << d.msg << ", " << d.num << ", " << d.f << ")\n";
 }
