@@ -33,7 +33,7 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-bool is_char(std::string value)
+bool ScalarConverter::is_char(std::string value)
 {
 	if (value.length() == 1 && !isdigit(value[0]) && isprint(value[0]))
 	{
@@ -42,7 +42,7 @@ bool is_char(std::string value)
 	return (false);
 }
 
-bool is_int(std::string value)
+bool ScalarConverter::is_int(std::string value)
 {
 	for (int i = 0; i < static_cast<int>(value.size()); i++)
 	{
@@ -58,7 +58,7 @@ bool is_int(std::string value)
 	return (true);
 }
 
-bool is_float(std::string value)
+bool ScalarConverter::is_float(std::string value)
 {
 	if (value == "-inff" || value == "+inff" || value == "nanf")
 	{
@@ -69,7 +69,7 @@ bool is_float(std::string value)
 	return (*endp == 'f' && endp != value.c_str());
 }
 
-bool is_double(std::string value)
+bool ScalarConverter::is_double(std::string value)
 {
 	if (value == "-inf" || value == "+inf" || value == "nan")
 	{
@@ -80,7 +80,7 @@ bool is_double(std::string value)
 	return (*endp == '\0' && endp != value.c_str());
 }
 
-Type find_type(std::string value)
+Type ScalarConverter::find_type(std::string value)
 {
 	if (is_char(value))
 	{
@@ -201,7 +201,7 @@ void ScalarConverter::convert(std::string value)
 			output(std::stod(value));
 			break;
 		case VOID:
-			std::cout << "Error: Unkown literal." << std::endl;
+			std::cout << "Error: Unknown literal." << std::endl;
 			break;
 	}
 }

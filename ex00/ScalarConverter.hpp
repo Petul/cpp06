@@ -31,6 +31,11 @@ class ScalarConverter
 	ScalarConverter(const ScalarConverter&);
 	ScalarConverter& operator=(const ScalarConverter&);
 	~ScalarConverter();
+	static bool is_char(std::string value);
+	static bool is_int(std::string value);
+	static bool is_float(std::string value);
+	static bool is_double(std::string value);
+	static Type find_type(std::string value);
 	static void output(char val);
 	static void output(int val);
 	static void output(float val);
