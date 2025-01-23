@@ -135,7 +135,7 @@ void ScalarConverter::output(double val)
 void ScalarConverter::print_char(double val)
 {
 	if (val > std::numeric_limits<char>::max() ||
-	    val < std::numeric_limits<char>::lowest() || std::isnan(val))
+	    val < std::numeric_limits<char>::lowest() || std::isnan(val) || val < 0)
 	{
 		std::cout << "char: impossible";
 	}
