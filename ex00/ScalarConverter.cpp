@@ -65,7 +65,7 @@ bool ScalarConverter::is_float(std::string value)
 	}
 	char *endp;
 	strtof(value.c_str(), &endp);
-	return (*endp == 'f' && endp != value.c_str());
+	return (*endp == 'f' && !endp[1] && endp != value.c_str());
 }
 
 bool ScalarConverter::is_double(std::string value)
@@ -164,16 +164,8 @@ void ScalarConverter::print_int(double val)
 
 void ScalarConverter::print_float(double val)
 {
-	if (val < std::numeric_limits<float>::lowest() ||
-	    val > std::numeric_limits<float>::max())
-	{
-		std::cout << "\nfloat: impossible";
-	}
-	else
-	{
-		std::cout << std::setprecision(1) << std::fixed
-		          << "\nfloat: " << static_cast<float>(val) << "f";
-	}
+	std::cout << std::setprecision(1) << std::fixed
+	          << "\nfloat: " << static_cast<float>(val) << "f";
 }
 
 void ScalarConverter::print_double(double val)
