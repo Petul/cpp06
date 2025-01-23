@@ -18,17 +18,20 @@
 
 Base *generate(void)
 {
-	float r = static_cast<float>(std::rand()) / RAND_MAX;
+	float r = static_cast<double>(std::rand()) / RAND_MAX;
 	if (r > 0 && r < 0.33)
 	{
+		std::cout << "Generated A" << std::endl;
 		return (new A());
 	}
 	else if (r >= 0.33 && r < 0.66)
 	{
+		std::cout << "Generated B" << std::endl;
 		return (new B());
 	}
 	else
 	{
+		std::cout << "Generated C" << std::endl;
 		return (new C());
 	}
 }
